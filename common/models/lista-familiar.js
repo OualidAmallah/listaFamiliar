@@ -22,4 +22,30 @@ module.exports = function(Listafamiliar) {
         });
     });
 
+    /**
+     * pedir solicitud
+    * @param {object} context me da context
+    * @param {Function(Error, object)} callback
+    */
+
+Listafamiliar.prototype.solicitud = function(context, callback) {
+    var solicitud
+    var listaFamiliar = this;
+    var  userId=context.req.accessToken.userId
+
+    listaFamiliar.solicitudes.add(userId, function(err) {
+        if(err) callback(err);
+        solicitud={
+            listafamiliarId: listaFamiliar.id,
+            usuarioId: userId
+        };
+        callback(null, solicitud);
+      });
+  };
+  
+
+
+
+
+
 };

@@ -47,7 +47,43 @@
       "principalId": "$authenticated",
       "permission": "ALLOW",
       "property": "create"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "solicitud"
     }
   ],
-  "methods": {}
+  "methods": {
+    "prototype.solicitud": {
+      "accepts": [
+        {
+          "arg": "context",
+          "type": "object",
+          "required": true,
+          "description": "me da context",
+          "http": {
+            "source": "context"
+          }
+        }
+      ],
+      "returns": [
+        {
+          "arg": "solicitud",
+          "type": "object",
+          "root": true,
+          "description": "devuelve solicitud"
+        }
+      ],
+      "description": "pedir solicitud",
+      "http": [
+        {
+          "path": "/solicitud",
+          "verb": "post"
+        }
+      ]
+    }
+  }
 }
