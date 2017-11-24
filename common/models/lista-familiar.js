@@ -44,8 +44,4 @@ Listafamiliar.prototype.solicitud = function(context, callback) {
   };
   
 
-
-
-
-
 };
