@@ -12,7 +12,7 @@ Usuario.prototype.aceptarSolicitud = function(context, callback) {
     var usuarioSolicitante = this;
     var listaId;
 
-    var userId=context.req.accessToken.userId
+    var userId=context.req.accessToken.userId;
 
     Usuario.findById(userId, function(err, usuarioAutenticado){
         if(err) callback(err); 
