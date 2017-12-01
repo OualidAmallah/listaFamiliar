@@ -17,16 +17,27 @@ Producto.limpiarLista = function(context, callback) {
     Usuario.findById(userId, function (err, usuarioAutenticado) {
         if (err) callback(err);
           listaId=usuarioAutenticado.listaFamiliarId;
+          var async = require('async');
 
-          Producto.find({where: {listaFamiliarId:listaId}}, function(err, product) {
+          Producto.find({where: {listaFamiliarId:listaId}}, function(err, products) {
             if(err) callback(err);
-            product.forEach(function (producto) {
-                producto.comprar=false;
-                producto.save();
-            })
-            Producto.find({where: {listaFamiliarId:listaId}}, function(err, product) {
-                if(err) callback(err);
-                callback(null, product);
+            var i=0;
+            async.forEachOf(products, (producto, key, cb) => {
+               producto.comprar=false;
+               console.log(i++);
+               producto.save(function(err){
+                if (err) return cb(err);
+                cb();
+               });
+
+            }, err => {
+                if (err) console.error(err.message);
+                console.log("hemos llegado al final");
+                Producto.find({where: {listaFamiliarId:listaId}}, function(err, product) {
+                    if(err) callback(err);
+                    console.log("estamos en el callback");
+                    callback(null, product);
+                });
             });
            
         });
