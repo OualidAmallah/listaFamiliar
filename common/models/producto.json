@@ -36,6 +36,13 @@
       "principalId": "$authenticated",
       "permission": "ALLOW",
       "property": "limpiarLista"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "miembroLista",
+      "permission": "ALLOW",
+      "property": "comprarproducto"
     }
   ],
   "methods": {
@@ -63,6 +70,24 @@
       "http": [
         {
           "path": "/limpiarLista",
+          "verb": "put"
+        }
+      ]
+    },
+    "prototype.comprarproducto": {
+      "accepts": [],
+      "returns": [
+        {
+          "arg": "limpiarLista",
+          "type": "array",
+          "root": true,
+          "description": "productos  comprados"
+        }
+      ],
+      "description": "comprar producto con id ",
+      "http": [
+        {
+          "path": "/comprado",
           "verb": "put"
         }
       ]

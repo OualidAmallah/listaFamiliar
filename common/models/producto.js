@@ -22,6 +22,7 @@ Producto.limpiarLista = function(context, callback) {
           Producto.find({where: {listaFamiliarId:listaId}}, function(err, products) {
             if(err) callback(err);
             var i=0;
+
             async.forEachOf(products, (producto, key, cb) => {
                producto.comprar=false;
                console.log(i++);
@@ -43,6 +44,31 @@ Producto.limpiarLista = function(context, callback) {
         });
         
     });
+
     
   };
+
+
+  /**
+ * comprar producto con id 
+ * @param {object} context me devueleve usuario
+ * @param {Function(Error, object)} callback
+ */
+
+Producto.prototype.comprarproducto = function(callback) {
+    var comprado;
+    var producto=this;
+
+    producto.comprar= !(producto.comprar);  
+    producto.save(function(err){
+        if(err) callback(err);
+        Producto.find({where: {listaFamiliarId:producto.listaFamiliarId}}, function(err, products) {
+            if(err) callback(err);
+            callback(null, products);
+        });
+    });
+    
+   
+  };
+  
 };
