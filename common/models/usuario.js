@@ -83,6 +83,11 @@ Usuario.prototype.rechazarSolicitudes = function(context ,callback) {
     });
 
   };
+
+  Usuario.beforeRemote('create', function (context, usuario, next) {
+    delete context.args.data.listaFamiliarId;
+    next();
+});
   
 
 };
