@@ -67,7 +67,6 @@ Producto.prototype.comprarproducto = function(callback) {
             callback(null, products);
         });
     });
-    
    
   };
   
